@@ -17,6 +17,24 @@ A full-stack application built with React, Vite, Express, and MongoDB.
 ## Project Work Flow
 The application follows a streamlined lifecycle for property maintenance management:
 
+```mermaid
+graph TD
+    Start((Start)) --> Create[Agent: Create Job]
+    Create --> Bid[Contractor: Browse & Bid]
+    Create -.->|Delete if unassigned| Deleted{{Job Deleted}}
+    Bid --> Select[Agent: Select & Accept Contractor]
+    Select --> Work[Contractor: Execute & Complete Work]
+    Work --> Invoice[Contractor: Submit Invoice]
+    Invoice --> PayInit[Agent: Initiate Payment]
+    PayInit --> PayConfirm[Contractor: Confirm Payment]
+    PayConfirm --> Receipt[Contractor: Download PDF Receipt]
+    Receipt --> End((End))
+
+    style Start fill:#f9f,stroke:#333,stroke-width:2px
+    style End fill:#f9f,stroke:#333,stroke-width:2px
+    style Deleted fill:#fee,stroke:#f66,stroke-dasharray: 5 5
+```
+
 1. **Job Creation**: An **Agent** posts a new job requirement with property details.
 2. **Contractor Bidding**: **Contractors** browse open jobs and express interest by proposing a budget.
 3. **Contractor Selection**: The **Agent** reviews interests and accepts a specific contractor for the job.

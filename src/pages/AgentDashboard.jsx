@@ -1,11 +1,11 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useStore } from '../context/StoreContext';
-import { PlusCircle, Search, MapPin, Calendar } from 'lucide-react';
+import { PlusCircle, Search, MapPin, Calendar, Trash2 } from 'lucide-react';
 import StatusBadge from '../components/StatusBadge';
 
 const AgentDashboard = () => {
-  const { jobs, user, fetchJobs, requests, fetchRequests } = useStore();
+  const { jobs, user, fetchJobs, requests, fetchRequests, deleteJob } = useStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +21,16 @@ const AgentDashboard = () => {
       return hasPendingRequests ? 'Interest Expressed' : 'Open';
     }
     return job.status;
+  };
+
+  const handleDelete = async (e, jobId) => {
+    e.stopPropagation();
+    if (window.confirm('Are you sure you want to delete this job? This action cannot be undone.')) {
+        const result = await deleteJob(jobId);
+        if (!result.success) {
+            alert(result.message || 'Failed to delete job');
+        }
+    }
   };
 
   return (
@@ -40,7 +50,18 @@ const AgentDashboard = () => {
           <div key={job._id} onClick={() => navigate(`/jobs/${job._id}`)} className="glass-card hover:translate-y-[-4px] transition-transform cursor-pointer group">
             <div className="flex justify-between items-start mb-3">
               <StatusBadge status={getJobDisplayStatus(job)} />
-              <span className="text-xs text-gray-400 font-mono">#{job._id.slice(-6)}</span>
+              <div className="flex items-center gap-2">
+                {job.status === 'Open' && (
+                  <button 
+                    onClick={(e) => handleDelete(e, job._id)}
+                    className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    title="Delete Job"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
+                <span className="text-xs text-gray-400 font-mono">#{job._id.slice(-6)}</span>
+              </div>
             </div>
             
             <h3 className="font-semibold text-lg text-gray-900 mb-1 group-hover:text-indigo-600 transition-colors line-clamp-1">{job.title}</h3>

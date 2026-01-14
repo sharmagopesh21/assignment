@@ -85,6 +85,17 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
+  const deleteJob = async (jobId) => {
+    try {
+        await api.delete(`/jobs/${jobId}`);
+        setJobs(prev => prev.filter(job => job._id !== jobId));
+        return { success: true };
+    } catch (err) {
+        console.error("Delete failed", err);
+        return { success: false, message: err.response?.data?.message || 'Delete failed' };
+    }
+  };
+
   const assignJob = (jobId, contractorId, price, contractorPhone) => {
     updateJobStatus(jobId, 'Assigned', { assignedTo: contractorId, price, contractorPhone });
   };
@@ -153,7 +164,7 @@ export const StoreProvider = ({ children }) => {
   return (
     <StoreContext.Provider value={{ 
       user, users: [], login, register, logout, // users list not exposed in API version
-      jobs, addJob, updateJobStatus, assignJob, fetchJobs,
+      jobs, addJob, updateJobStatus, deleteJob, assignJob, fetchJobs,
       invoices, createInvoice,
       requests, createRequest, fetchRequestsForJob, acceptRequest, rejectRequest, fetchRequests,
       fetchContractorJobs
