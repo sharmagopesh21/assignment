@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
-import { UserCircle, Hammer, ArrowLeft, Mail, Lock, User } from 'lucide-react';
+import { UserCircle, Hammer, ArrowLeft, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
   const { login, register, logout } = useStore();
@@ -14,6 +14,7 @@ const Login = () => {
   const [step, setStep] = useState('role'); // 'role' | 'auth'
   const [selectedRole, setSelectedRole] = useState(null);
   const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
@@ -153,13 +154,21 @@ const Login = () => {
             <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400"><Lock size={18} /></div>
                 <input 
-                    type="password" 
+                    type={showPassword ? "text" : "password"} 
                     required 
-                    className="input-field pl-10" 
+                    className="input-field pl-10 pr-10" 
                     placeholder="••••••••"
                     value={formData.password}
                     onChange={e => setFormData({...formData, password: e.target.value})}
                 />
+                <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
             </div>
           </div>
 
