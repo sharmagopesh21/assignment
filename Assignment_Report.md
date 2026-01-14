@@ -25,7 +25,7 @@ While the core architecture, logic, and design were manually implemented, AI too
 While AI assisted with generating basic starting points for some pages, all code was thoroughly reviewed, debugged, and significantly edited manually to ensure it met project requirements, design standards, and functional consistency.
 
 ## 4. Total Time Taken
-- **Total Development Time:** 10 Hours  
+- **Total Development Time:** 11 Hours  
 *(Includes planning, database modeling, frontend/backend development, testing, and deployment)*
 
 ---
