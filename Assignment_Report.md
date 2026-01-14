@@ -16,7 +16,7 @@ While the core architecture, logic, and design were manually implemented, AI too
     - Core Authentication and Role-based Logic.
     - UI/UX Design and Tailwind CSS Styling.
     - API Integration and State Management.
-- **AI-Assisted Features (approx. 15%):**
+- **AI-Assisted Features (approx. 10%):**
     - Generation of initial standard page structure and boilerplate components.
     - Implementation of PDF generation logic for payment receipts.
     - Troubleshooting production-specific configurations.
