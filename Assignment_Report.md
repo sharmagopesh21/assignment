@@ -10,13 +10,13 @@ This project was developed as a full-stack solution using **React (Vite)** for t
 While the core architecture, logic, and design were manually implemented, AI tools were utilized for specific technical optimizations and utility features.
 
 - **AI Tools Used:** Google Gemini.
-- **Core Manual Implementation (approx. 90%):**
+- **Core Manual Implementation (approx. 80%):**
     - Architecture and Component Structure.
     - Database Schema Design (Users, Jobs, Requests).
     - Core Authentication and Role-based Logic.
     - UI/UX Design and Tailwind CSS Styling.
     - API Integration and State Management.
-- **AI-Assisted Features (approx. 10%):**
+- **AI-Assisted Features (approx. 20%):**
     - Generation of initial standard page structure and boilerplate components.
     - Implementation of PDF generation logic for payment receipts.
     - Troubleshooting production-specific configurations.
